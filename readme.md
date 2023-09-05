@@ -2,7 +2,7 @@
 
 ### It contains the following libraries as default dependencies:
 
-- [pg]([https://www.npmjs.com/package/pg])
+- [pg](https://www.npmjs.com/package/pg)
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [joi](https://www.npmjs.com/package/joi)
 - [express](https://www.npmjs.com/package/express)
