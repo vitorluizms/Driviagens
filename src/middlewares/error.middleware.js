@@ -14,6 +14,7 @@ export default function errorHandler(error, req, res, next) {
     return res.status(409).send("Cidade já cadastrada!");
 
   if (error.message.includes("foreign key")) {
+    
     if (error.message.includes("travels")) {
       return res.status(404).send("Passageiro/voo inválido(s)");
     } else {
