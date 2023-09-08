@@ -4,5 +4,3 @@ export function conflict(message) {
     message: `${message}`,
   };
 }
-
-export const errors = { conflict };

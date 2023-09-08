@@ -3,6 +3,8 @@ import customParseFormat from "dayjs/plugin/customParseFormat.js";
 import { flightRepository } from "../repositories/flight.repository.js";
 import { conflict } from "../errors/conflict.js";
 import { unprocessable } from "../errors/unprocessableContent.js";
+import { formatter } from "../utils/dateFormatter.js";
+import { badRequest } from "../errors/badRequest.js";
 dayjs.extend(customParseFormat);
 
 async function create(origin, destination, date) {
@@ -16,4 +18,23 @@ async function create(origin, destination, date) {
   await flightRepository.create(origin, destination, date);
 }
 
-export const flightService = { create };
+async function get(origin, destination, smallerDate, biggerDate) {
+  if ((smallerDate && !biggerDate) || (biggerDate && !smallerDate)) {
+    throw unprocessable("Informe as duas datas!");
+  }
+
+  let smaller = formatter(smallerDate);
+  let bigger = formatter(biggerDate);
+  if (dayjs(smaller).isAfter(bigger)) {
+    throw badRequest("A data inicial precisa ser maior que a final!");
+  }
+  const promise = await flightRepository.getFlights(
+    origin,
+    destination,
+    (smaller = smaller === "Invalid Date" ? undefined : smaller),
+    (bigger = bigger === "Invalid Date" ? undefined : bigger)
+  );
+  return promise.rows;
+}
+
+export const flightService = { create, get };

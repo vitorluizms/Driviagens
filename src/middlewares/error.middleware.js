@@ -10,11 +10,13 @@ export default function errorHandler(error, req, res, next) {
   if (error.code === 422)
     return res.status(httpStatus.UNPROCESSABLE_ENTITY).send(error.message);
 
+  if (error.code === 400)
+    return res.status(httpStatus.BAD_REQUEST).send(error.message);
+  
   if (error.message.includes("unique"))
     return res.status(409).send("Cidade já cadastrada!");
 
   if (error.message.includes("foreign key")) {
-    
     if (error.message.includes("travels")) {
       return res.status(404).send("Passageiro/voo inválido(s)");
     } else {

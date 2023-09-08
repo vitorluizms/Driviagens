@@ -10,4 +10,21 @@ async function create(req, res) {
   res.status(201).send("Voo cadastrado com sucesso!");
 }
 
-export const flightController = { create };
+async function get(req, res) {
+  const {
+    origin,
+    destination,
+    "smaller-date": smallerDate,
+    "bigger-date": biggerDate,
+  } = req.query;
+  const result = await flightService.get(
+    origin,
+    destination,
+    smallerDate,
+    biggerDate
+  );
+
+  res.status(200).send(result);
+}
+
+export const flightController = { create, get };

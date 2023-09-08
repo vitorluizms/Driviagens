@@ -7,4 +7,10 @@ async function create(req, res) {
   res.status(201).send("Viagem cadastrada com sucesso!");
 }
 
-export const travelControllers = { create };
+async function get(req, res) {
+  const { name } = req.query;
+
+
+}
+
+export const travelControllers = { create, get };
