@@ -18,9 +18,13 @@ async function create(origin, destination, date) {
   await flightRepository.create(origin, destination, date);
 }
 
-async function get(origin, destination, smallerDate, biggerDate) {
+async function get(origin, destination, smallerDate, biggerDate, page) {
   if ((smallerDate && !biggerDate) || (biggerDate && !smallerDate)) {
     throw unprocessable("Informe as duas datas!");
+  }
+
+  if (page && (isNaN(parseInt(page)) || page <= 0)) {
+    throw badRequest("Invalid page value");
   }
 
   let smaller = formatter(smallerDate);
@@ -32,7 +36,8 @@ async function get(origin, destination, smallerDate, biggerDate) {
     origin,
     destination,
     (smaller = smaller === "Invalid Date" ? undefined : smaller),
-    (bigger = bigger === "Invalid Date" ? undefined : bigger)
+    (bigger = bigger === "Invalid Date" ? undefined : bigger),
+    page
   );
   return promise.rows;
 }

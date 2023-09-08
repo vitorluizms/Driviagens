@@ -28,4 +28,5 @@ export const flightQuerySchema = joi.object({
   destination: joi.string().optional(),
   "smaller-date": Joi.date().format("DD-MM-YYYY").utc(),
   "bigger-date": Joi.date().format("DD-MM-YYYY").utc(),
+  page: joi.optional(),
 });

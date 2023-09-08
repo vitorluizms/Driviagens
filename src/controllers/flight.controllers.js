@@ -16,12 +16,14 @@ async function get(req, res) {
     destination,
     "smaller-date": smallerDate,
     "bigger-date": biggerDate,
+    page,
   } = req.query;
   const result = await flightService.get(
     origin,
     destination,
     smallerDate,
-    biggerDate
+    biggerDate,
+    page
   );
 
   res.status(200).send(result);

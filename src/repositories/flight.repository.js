@@ -9,9 +9,10 @@ async function create(origin, destination, date) {
   );
 }
 
-async function getFlights(origin, destination, smallerDate, biggerDate) {
+async function getFlights(origin, destination, smallerDate, biggerDate, page) {
   let query = "";
   let injection = [];
+  let pagination = 0;
 
   if (origin) {
     query += `${
@@ -51,8 +52,11 @@ async function getFlights(origin, destination, smallerDate, biggerDate) {
     injection.push(smallerDate, biggerDate);
   }
 
-  console.log(injection);
-  console;
+  if (page) {
+    pagination = (page - 1) * 10;
+    injection.push(pagination);
+  }
+
   const result = db.query(
     `
     SELECT flights.id ,cities.name AS origin, destination.name AS destination, TO_CHAR(flights.date, 'DD-MM-YYYY') AS date
@@ -60,7 +64,8 @@ async function getFlights(origin, destination, smallerDate, biggerDate) {
 	    JOIN cities ON cities.id = flights.origin
 	    JOIN cities AS destination ON destination.id = flights.destination
       ${query}
-	    ORDER BY flights.date;
+	    ORDER BY flights.date
+      ${page ? `LIMIT 10 OFFSET $${injection.length}` : ""};
   `,
     injection
   );
