@@ -10,7 +10,8 @@ async function create(req, res) {
 async function get(req, res) {
   const { name } = req.query;
 
-
+  const result = await travelServices.get(name);
+  res.status(200).send(result);
 }
 
 export const travelControllers = { create, get };
