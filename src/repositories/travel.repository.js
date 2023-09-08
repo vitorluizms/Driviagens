@@ -9,9 +9,10 @@ function create(passengerId, flightId) {
   );
 }
 
-function get(name) {
+function get(name, page) {
   let query = "";
   let injection = [];
+  let pagination = 0;
 
   if (name) {
     if (typeof name === "object") {
@@ -31,6 +32,11 @@ function get(name) {
     }
   }
 
+  if (page) {
+    pagination = (page - 1) * 10;
+    injection.push(pagination);
+  }
+
   const result = db.query(
     `
   SELECT "firstName" || ' ' || "lastName" AS passenger, COUNT(travels."passengerId") AS travels
@@ -38,7 +44,8 @@ function get(name) {
 	  LEFT JOIN travels ON travels."passengerId" = passengers.id
 	  ${name ? query : ""}
 	  GROUP BY passengers."firstName", passengers."lastName"
-    ORDER BY travels DESC;
+    ORDER BY travels DESC
+    ${page ? `LIMIT 10 OFFSET $${injection.length}` : ""};
   `,
     injection
   );

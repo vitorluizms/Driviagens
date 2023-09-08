@@ -4,8 +4,11 @@ async function create(passengerId, flightId) {
   await travelRepository.create(passengerId, flightId);
 }
 
-async function get(name) {
-  const result = await travelRepository.get(name);
+async function get(name, page) {
+  if (page && (isNaN(parseInt(page)) || page <= 0))
+    throw badRequest("Invalid page value");
+
+  const result = await travelRepository.get(name, page);
   if (result.rowCount > 10)
     throw {
       code: 500,
