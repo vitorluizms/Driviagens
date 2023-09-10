@@ -15,7 +15,7 @@ async function create(origin, destination, date) {
   if (dayjs().isAfter(dayjs(formattedDate)))
     throw unprocessable("A data informadada já passou!");
 
-  await flightRepository.create(origin, destination, date);
+  await flightRepository.create(origin, destination, formattedDate);
 }
 
 async function get(origin, destination, smallerDate, biggerDate, page) {
