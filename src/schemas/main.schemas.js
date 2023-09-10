@@ -1,4 +1,4 @@
-import JoiImport, { optional } from "joi";
+import JoiImport from "joi";
 import joi from "joi";
 import DateExtension from "@joi/date";
 const Joi = JoiImport.extend(DateExtension);
