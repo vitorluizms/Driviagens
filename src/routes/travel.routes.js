@@ -1,6 +1,9 @@
 import { Router } from "express";
-import { validateSchema } from "../middlewares/validateSchema.middleware.js";
-import { travelSchema } from "../schemas/main.schemas.js";
+import {
+  validateQuerySchema,
+  validateSchema,
+} from "../middlewares/validateSchema.middleware.js";
+import { travelSchema, travelsQuerySchema } from "../schemas/main.schemas.js";
 import { travelControllers } from "../controllers/travel.controllers.js";
 
 const travelRouter = Router();
@@ -11,6 +14,10 @@ travelRouter.post(
   travelControllers.create
 );
 
-travelRouter.get("/passengers/travels", travelControllers.get);
+travelRouter.get(
+  "/passengers/travels",
+  validateQuerySchema(travelsQuerySchema),
+  travelControllers.get
+);
 
 export default travelRouter;
