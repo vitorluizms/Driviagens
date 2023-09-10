@@ -1,4 +1,4 @@
-import JoiImport from "joi";
+import JoiImport, { optional } from "joi";
 import joi from "joi";
 import DateExtension from "@joi/date";
 const Joi = JoiImport.extend(DateExtension);
@@ -15,7 +15,7 @@ export const citySchema = joi.object({
 export const flightSchema = joi.object({
   origin: joi.number().required(),
   destination: joi.number().required(),
-  date: Joi.date().format("DD-MM-YYYY").utc(),
+  date: Joi.date().format("DD-MM-YYYY").utc().required(),
 });
 
 export const travelSchema = joi.object({
@@ -26,7 +26,7 @@ export const travelSchema = joi.object({
 export const flightQuerySchema = joi.object({
   origin: joi.string().optional(),
   destination: joi.string().optional(),
-  "smaller-date": Joi.date().format("DD-MM-YYYY").utc(),
-  "bigger-date": Joi.date().format("DD-MM-YYYY").utc(),
+  "smaller-date": Joi.date().format("DD-MM-YYYY").utc().optional(),
+  "bigger-date": Joi.date().format("DD-MM-YYYY").utc().optional(),
   page: joi.optional(),
 });
