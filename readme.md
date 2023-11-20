@@ -1,5 +1,3 @@
-# This is a template for a back-end restful API
-
 ### It contains the following libraries as default dependencies:
 
 - [pg](https://www.npmjs.com/package/pg)
@@ -16,7 +14,7 @@
 
 ## Usage
 
-- Development mode -> auto-reloads when a file in the app is modified.
+- Development mode -> auto-reloads when a file in the app is modified.  
 
 ```bash
 npm run dev
