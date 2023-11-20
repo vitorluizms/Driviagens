@@ -1,38 +1,32 @@
-### It contains the following libraries as default dependencies:
+# Demo
+[Link do deploy](https://driviagens-api-ph09.onrender.com)
+
+# Como funciona?
+Este projeto é uma API REST para atender a aplicação de notícias rápidas da TopNews. Ela possui apenas uma única entidade: `news`.
+
+# Tecnologias utilizadas
+Para este projeto, foram utilizadas:
 
 - [pg](https://www.npmjs.com/package/pg)
+- [node](https://nodejs.org/en)
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [joi](https://www.npmjs.com/package/joi)
 - [express](https://www.npmjs.com/package/express)
 - [cors](https://www.npmjs.com/package/cors)
 - [uuid](https://www.npmjs.com/package/uuid)
 
-### Requirements
+### Requisitos
 
-- [mongodb version 6.0 or later](https://www.mongodb.com/)
-- [node.js](https://nodejs.org/en)
+- [node.js version 18.16.1](https://nodejs.org/en)
 
-## Usage
+# Como rodar em desenvolvimento
+Para executar este projeto em desenvolvimento, é necessário seguir os passos abaixo:
 
-- Development mode -> auto-reloads when a file in the app is modified.  
+- Clonar o repositório;
+- Baixar as dependências necessárias com o comando: `npm install`;
+- Em seguida, criar o arquivo `.env` com a variável do banco: `DATABASE_URL=postgresql://${POSTGRES_USERNAME}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DATABASE}?schema=public`;
+- A propriedade `DATABASE_URL` é usada para fazer a conexão com o banco de dados.
+- Para rodar o projeto em desenvolvimento, execute o comando `npm run dev`;
 
-```bash
-npm run dev
-```
-
-- Non development mode -> need to re-run after modify a script.
-
-```bash
-npm start
-```
-
-## !Attention!
-
-This template comes with a [.env](.env) file that normally you <span style="color: red"> do not </span>  want to <span style="color: orange"> commit </span> case it usually
-is a file that you store <span style="color: green"> API keys </span>  and or other sensitive information.
-
-You probally want to add a line to the .gitinore file with the text below  <span style="color: red"> so it wont </span> be <span style="color: yellow"> pushed </span> to your repository on the next commit.
-
-```bash
-.env
-```
+# Como rodar em produção:
+- Rodar o comando `npm run start`
